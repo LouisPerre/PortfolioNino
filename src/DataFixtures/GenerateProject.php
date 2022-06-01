@@ -26,7 +26,8 @@ class GenerateProject extends Fixture
             $project->setRoles('CDP');
             $project->setEvent('BAP');
             $project->setTheme('Post Apo');
-
+            $project->setTechnologie('Unreal Engine 5');
+            $project->setContext('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu lectus metus. Vivamus ac magna ex. Ut justo neque, malesuada vel aliquet aliquam, fermentum at magna. Suspendisse at magna leo. Morbi tempus mollis nibh vel laoreet. Quisque mattis massa quis nisi blandit, at interdum turpis sodales. Phasellus ut rhoncus libero. Donec rutrum laoreet egestas. Praesent at libero congue, aliquet lorem bibendum, rhoncus ligula. In sed magna sed risus dictum porta. Curabitur pretium tellus aliquam, sagittis.');
             $manager->persist($project);
         }
         $manager->flush();
