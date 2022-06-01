@@ -1,0 +1,86 @@
+$primary: #af64ed;
+$darkerPurple: #a84ff4;
+
+body {
+  font-family: 'Lato', sans-serif !important;
+  overflow-x: hidden;
+}
+
+.custom-text {
+  font-size: 24px;
+  text-decoration: underline;
+  text-underline: #0a58ca;
+}
+
+.vh-60 {
+  height: 60vh;
+}
+
+.centerBackground {
+  background-size: cover;
+  background-position: center;
+  box-sizing: border-box;
+  height: 706px;
+  width: 1920px;
+}
+
+.max {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.text {
+  h1 {
+    font-size: 48px;
+    font-weight: 700 !important;
+  }
+  p {
+    font-size: 24px;
+  }
+  > a {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    color: black;
+    text-decoration: none;
+    font-size: 24px;
+  }
+}
+
+.bg-indigo {
+  background-color: $darkerPurple !important;
+}
+
+.w-40 {
+  width: 40%;
+}
+
+.my-second-carousel {
+  width: 40%;
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.section_contact_form {
+  width: 60%;
+}
+
+.borderRed {
+  border-color: red;
+}
+
+.carouselVideo {
+  width: 60%;
+
+  img {
+    max-width: 100%;
+  }
+}
+
+

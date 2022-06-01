@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AppController!{% endblock %}
+
+{% block body %}
+<div class="position-relative d-flex justify-content-center bg-dark">
+    <div class="my-carousel w-100 h-100">
+        {% for imgHeader in imgsHeader %}
+            <div style="background-image: url('{{ asset('upload/imageHeader/') }}{{ imgHeader.path }}')" class="centerBackground max"></div>
+        {% endfor %}
+    </div>
+    <div class="text position-absolute bottom-0 text-white text-center mb-5">
+        <h1>Hi, I'm Nino BARBIER</h1>
+        <p>Passionate about games and their designs</p>
+        <p>Currently studying Game Design at IIM</p>
+        <a href="#aboutMe" class="shadow">More about me</a>
+    </div>
+</div>
+<section class="p-2 bg-dark">
+    <div class="accordion">
+        <div class="accordion-item bg-indigo">
+            <h2 style="text-align: center" class="mt-2 text-white fw-bold fs-1">My favorites</h2>
+            <div id="collapseOne" class="accordion-collapse collapse show d-flex flex-wrap p-5 gap-3 justify-content-center" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                {% for favorite in allFavorites %}
+                    <a href="{{ path('app_project', {'id': favorite.id }) }}" class="card mb-3 text-dark text-decoration-none" style="max-width: 45%;">
+                        <div class="row g-0">
+                            <div class="col-md-4" style="display: flex; align-items: center">
+                                <img src="{{ asset('upload/projectHighlight/') }}{{ favorite.imageHighlight }}" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ favorite.title }}</h5>
+                                    <h4 class="card-text"><i class="fa-solid fa-calendar-days"></i> {{ favorite.startDate | date("jS F Y") }}</h4>
+                                    <h4 class="card-text"><i class="fa-solid fa-clock-rotate-left"></i> {{ favorite.duration }}</h4>
+                                    <h4 class="card-text"><i class="fa-solid fa-person"></i> {{ favorite.people }}{{ favorite.people > 1 ? ' persons' : ' person' }}</h4>
+                                    <p class="mt-4">{{ favorite.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+            <h2 style="text-align: center" class="mt-2 text-white fw-bold fs-1 mb-4" id="project">Projects</h2>
+            <div class="d-flex flex-wrap justify-content-center gap-4">
+                {% for project in allProjects %}
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ asset('upload/projectHighlight/') }}{{ project.imageHighlight }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ project.title }}</h5>
+                            <p class="card-text">{{ project.roles }} - {{ project.people }}{{ project.people > 1 ? ' persons' : ' person' }} - {{ project.duration }} - {{ project.event }} - ( {{ project.theme }} )</p>
+                            <a href="{{ path('app_project', {'id': project.id }) }}" class="btn btn-primary">See the project</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <h2 style="text-align: center" class="mt-4 text-white fw-bold fs-1 mb-2" id="aboutMe">About me</h2>
+            <div>
+                <div class="d-flex vw-100 align-items-center p-3 justify-content-center gap-5">
+                    <div class="w-40 fs-3">
+                        <p>I've always been interested by tech, games, toys , as a kid and soon enough I would start to wonder "why where they made like this ?" Some of these are still in my hobbies</p>
+                    </div>
+                    <div class="my-second-carousel d-flex rounded">
+                        {% for sliderHobby in sliderHobbies %}
+                            <img src="{{ asset('upload/sliderHobbies/') }}{{ sliderHobby.path }}" alt="" class="rounded">
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="d-flex vw-100 align-items-center p-5 justify-content-center gap-5">
+                    <div class="my-second-carousel d-flex rounded">
+                        {% for sliderGame in sliderGames %}
+                            <img src="{{ asset('upload/sliderGames/') }}{{ sliderGame.path }}" alt="" class="rounded">
+                        {% endfor %}
+                    </div>
+                    <div class="w-40 fs-3">
+                        <p>I play a lot of different types of games, I probably have played 300+ games in my life. Its really hard to say what I don't like… Here are some of my currently favorites.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contact d-flex justify-content-center flex-column align-items-center">
+            <div class="logo fs-1 mt-3 d-flex gap-5">
+                <a href="#" class="text-white"><i class="fa-brands fa-itch-io"></i></a>
+                <a href="#" class="text-white"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="text-white"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#" class="text-white"><i class="fa-solid fa-envelope-open"></i></a>
+                <a href="#" class="text-white"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+            <section class="section_contact_form">
+                {{ form_start(contactForm, {'attr': {'class': 'd-flex flex-column', 'id': 'formContact'}})}}
+                <div class="form-group text-white mb-2">
+                    {{ form_label(contactForm.email) }}
+                    <div class="form-widget">
+                        {{ form_widget(contactForm.email) }}
+                    </div>
+                </div>
+                <div class="form-group text-white mb-2">
+                    {{ form_label(contactForm.subject) }}
+                    <div class="form-widget ">
+                        {{ form_widget(contactForm.subject) }}
+                    </div>
+                </div>
+                <div class="form-group text-white mb-2">
+                    {{ form_label(contactForm.message) }}
+                    <div class="form-widget">
+                        {{ form_widget(contactForm.message) }}
+                    </div>
+                </div>
+                {{ form_widget(contactForm.submit) }}
+                {{ form_end(contactForm) }}
+            </section>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
