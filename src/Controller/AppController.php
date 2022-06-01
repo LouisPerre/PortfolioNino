@@ -46,9 +46,15 @@ class AppController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_project')]
+    /**
+     * @param int $id
+     * @param ProjectRepository $projectRepository
+     * @param ImageProjectRepository $imageProjectRepository
+     * @return Response
+     */
+    #[Route('/{id}', name: 'app_project', requirements: ['id'=>'\d+'])]
     public function video(
-        $id,
+        int $id,
         ProjectRepository $projectRepository,
         ImageProjectRepository $imageProjectRepository
     ): Response
