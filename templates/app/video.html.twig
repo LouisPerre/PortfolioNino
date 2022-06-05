@@ -24,11 +24,15 @@
         <h2 class="text-white">Pitch</h2>
         <p class="w-50 text-white">{{ project.description }}</p>
         <div class="carouselVideo d-flex rounded mt-3 mb-3">
-            {% for image in sliderProject %}
+            {% for image in project.imageSlider %}
                 <img src="{{ asset('upload/projectSlider/') }}{{ image.path }}" alt="" class="rounded">
             {% endfor %}
         </div>
-
+        <div class="mb-5 mt-3">
+            {% for file in project.fileProjects %}
+                <a href="{{ asset('upload/projectFile/') }}{{ file.path }}" download class="p-3 bg-secondary rounded text-white text-decoration-none">{{ file.name }}</a>
+            {% endfor %}
+        </div>
         <span style="height: 5px; width: 100px; background-color: white" class="mb-2"></span>
         <h2 class="text-white">Additional infos</h2>
         <div class="d-flex w-75 mt-5 gap-4 align-items-center">

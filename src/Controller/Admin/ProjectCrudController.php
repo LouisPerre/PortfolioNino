@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -46,9 +47,9 @@ class ProjectCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->setDisabled()->hideOnForm(),
+            IdField::new('id')->setDisabled()->hideOnForm()->hideOnIndex(),
             TextField::new('title')->setSortable(false),
-            ImageField::new('imageHighlight')
+            ImageField::new('imageHighlight', 'Image')
                 ->setUploadDir('public/upload/projectHighlight')
                 ->setBasePath('upload/projectHighlight')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
@@ -58,19 +59,20 @@ class ProjectCrudController extends AbstractCrudController
                     ]
                 ])
                 ->setSortable(false),
-            DateTimeField::new('startDate'),
-            TextField::new('duration')->setSortable(false),
+            DateTimeField::new('startDate', 'Debut'),
+            TextField::new('duration', 'Duree')->setSortable(false),
             IntegerField::new('people'),
             TextEditorField::new('description')->setSortable(false),
-            TextField::new('youtubeVideo')->setSortable(false),
-            TextField::new('technologie')->setSortable(false),
+            TextField::new('youtubeVideo', 'Video')->setSortable(false),
+            TextField::new('technologie', 'Techno')->setSortable(false),
             TextEditorField::new('context')->setSortable(false),
-            TextField::new('linkItch')->setSortable(false),
-            BooleanField::new('isFavorite'),
+            TextField::new('linkItch', 'Itch')->setSortable(false),
+            BooleanField::new('isFavorite', 'Favoris'),
             TextField::new('roles')->setSortable(false),
             TextField::new('event')->setSortable(false),
             TextField::new('theme')->setSortable(false),
-            ArrayField::new('files')->setSortable(false)
+            AssociationField::new('imageSlider')->hideOnForm()->hideWhenCreating(),
+            AssociationField::new('fileProjects')->hideOnForm()->hideWhenCreating()
         ];
     }
 

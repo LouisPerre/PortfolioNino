@@ -42,7 +42,7 @@ class Project
     #[ORM\Column(type: 'boolean')]
     private $isFavorite;
 
-    #[ORM\OneToMany(mappedBy: 'project', targetEntity: ImageProject::class)]
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: ImageProject::class, cascade: ['remove'])]
     private $imageSlider;
 
     #[ORM\Column(type: 'string', length: 25, nullable: true)]
@@ -66,10 +66,14 @@ class Project
     #[ORM\Column(type: 'array', nullable: true)]
     private $files = [];
 
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: FileProject::class, orphanRemoval: true)]
+    private $fileProjects;
+
     public function __construct()
     {
         $this->imgSlider = new ArrayCollection();
         $this->imageSlider = new ArrayCollection();
+        $this->fileProjects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -315,5 +319,40 @@ class Project
         $this->files = $files;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, FileProject>
+     */
+    public function getFileProjects(): Collection
+    {
+        return $this->fileProjects;
+    }
+
+    public function addFileProject(FileProject $fileProject): self
+    {
+        if (!$this->fileProjects->contains($fileProject)) {
+            $this->fileProjects[] = $fileProject;
+            $fileProject->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFileProject(FileProject $fileProject): self
+    {
+        if ($this->fileProjects->removeElement($fileProject)) {
+            // set the owning side to null (unless already changed)
+            if ($fileProject->getProject() === $this) {
+                $fileProject->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getTitle();
     }
 }
