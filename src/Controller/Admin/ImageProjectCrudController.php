@@ -19,7 +19,7 @@ class ImageProjectCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
+            IdField::new('id')->setDisabled()->hideOnForm(),
             ImageField::new('path')
                 ->setUploadDir('public/upload/projectSlider')
                 ->setBasePath('upload/projectSlider')
