@@ -9,6 +9,8 @@ use App\Repository\ImageProjectRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\SliderGamesRepository;
 use App\Repository\SliderHobbiesRepository;
+use App\Repository\TextHomePageRepository;
+use App\Repository\UserRepository;
 use App\Service\CheckFormContactService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,14 +27,15 @@ class AppController extends AbstractController
         SliderHobbiesRepository $hobbiesRepository,
         SliderGamesRepository $gamesRepository,
         Request $request,
-        CheckFormContactService $checkFormContact
+        CheckFormContactService $checkFormContact,
+        UserRepository $userRepository,
+        TextHomePageRepository $pageRepository
     ): Response
     {
         $contactForm = $this->createForm(ContactFormType::class);
         $contactForm->handleRequest($request);
         if ($contactForm->isSubmitted() && $contactForm->isValid())
         {
-//            var_dump(gettype($contactForm));
             $checkFormContact->checkFormValidity($contactForm);
         }
 
@@ -42,6 +45,8 @@ class AppController extends AbstractController
             'allProjects' => $projectRepository->getByFavorite(false),
             'sliderHobbies' => $hobbiesRepository->findAll(),
             'sliderGames' => $gamesRepository->findAll(),
+            'user' => $userRepository->findOneBy(['email' => 'nino@famillebarbier.net']),
+            'text' => $pageRepository->findOneBy(['id' => 1]),
             'contactForm' => $contactForm->createView()
         ]);
     }

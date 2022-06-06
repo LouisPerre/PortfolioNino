@@ -9,6 +9,8 @@ use App\Entity\ImageProject;
 use App\Entity\Project;
 use App\Entity\SliderGames;
 use App\Entity\SliderHobbies;
+use App\Entity\TextHomePage;
+use App\Entity\User;
 use App\Repository\ContactFormRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
@@ -78,10 +80,14 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::subMenu('Action', 'fas fa-bars')->setSubItems([
             MenuItem::linkToCrud('Show Image Header', 'fas fa-eye', ImageHeader::class),
             MenuItem::linkToCrud('Show Slider Games', 'fas fa-eye', SliderGames::class),
-            MenuItem::linkToCrud('Show Slider Hobbies', 'fas fa-eye', SliderHobbies::class)
+            MenuItem::linkToCrud('Show Slider Hobbies', 'fas fa-eye', SliderHobbies::class),
+            MenuItem::linkToCrud('Show text home', 'fas fa-eye', TextHomePage::class),
         ]);
 
         yield MenuItem::section('Contact');
         yield MenuItem::linkToCrud('Show contact request', 'fas fa-eye', ContactForm::class);
+
+        yield MenuItem::section('User');
+        yield MenuItem::linkToCrud('Show my user', 'fas fa-eye', User::class);
     }
 }

@@ -55,26 +55,30 @@
             </div>
             <h2 style="text-align: center" class="mt-4 text-white fw-bold fs-1 mb-2" id="aboutMe">About me</h2>
             <div>
-                <div class="d-flex vw-100 align-items-center p-3 justify-content-center gap-5">
-                    <div class="w-40 fs-3">
-                        <p>I've always been interested by tech, games, toys , as a kid and soon enough I would start to wonder "why where they made like this ?" Some of these are still in my hobbies</p>
+                {% if sliderHobbies is not null and sliderHobbies | length >= 1 %}
+                    <div class="d-flex vw-100 align-items-center p-3 justify-content-center gap-5">
+                        <div class="w-40 fs-3 text-white">
+                            <p>{{ text.textHobbies }}</p>
+                        </div>
+                        <div class="my-second-carousel d-flex rounded">
+                            {% for sliderHobby in sliderHobbies %}
+                                <img src="{{ asset('upload/sliderHobbies/') }}{{ sliderHobby.path }}" alt="" class="rounded">
+                            {% endfor %}
+                        </div>
                     </div>
-                    <div class="my-second-carousel d-flex rounded">
-                        {% for sliderHobby in sliderHobbies %}
-                            <img src="{{ asset('upload/sliderHobbies/') }}{{ sliderHobby.path }}" alt="" class="rounded">
-                        {% endfor %}
+                {% endif %}
+                {% if sliderGames is not null and sliderGames | length >= 1 %}
+                    <div class="d-flex vw-100 align-items-center p-5 justify-content-center gap-5">
+                        <div class="my-second-carousel d-flex rounded">
+                            {% for sliderGame in sliderGames %}
+                                <img src="{{ asset('upload/sliderGames/') }}{{ sliderGame.path }}" alt="" class="rounded">
+                            {% endfor %}
+                        </div>
+                        <div class="w-40 fs-3 text-white">
+                            <p>{{ text.textGames }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="d-flex vw-100 align-items-center p-5 justify-content-center gap-5">
-                    <div class="my-second-carousel d-flex rounded">
-                        {% for sliderGame in sliderGames %}
-                            <img src="{{ asset('upload/sliderGames/') }}{{ sliderGame.path }}" alt="" class="rounded">
-                        {% endfor %}
-                    </div>
-                    <div class="w-40 fs-3">
-                        <p>I play a lot of different types of games, I probably have played 300+ games in my life. Its really hard to say what I don't like… Here are some of my currently favorites.</p>
-                    </div>
-                </div>
+                {% endif %}
             </div>
         </div>
         <div class="contact d-flex justify-content-center flex-column align-items-center">
@@ -84,6 +88,10 @@
                 <a href="https://www.linkedin.com/in/nino-barbier/" class="text-white" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
                 <a href="mailto:nino@famillebarbier.net" class="text-white"><i class="fa-solid fa-envelope-open"></i></a>
                 <a href="https://twitter.com/KarroteVI" class="text-white" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitter"></i></a>
+                {% if user.resume %}
+                    <a href="{{ asset('upload/userResume/') }}{{ user.resume }}" download class="text-white" rel="noopener noreferrer"><i class="fa-solid fa-file"></i></a>
+                {% endif %}
+
             </div>
             <section class="section_contact_form">
                 {{ form_start(contactForm, {'attr': {'class': 'd-flex flex-column', 'id': 'formContact'}})}}
