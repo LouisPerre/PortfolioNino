@@ -20,15 +20,17 @@ $('.my-second-carousel').slick({
     autoplay: true,
 });
 
-$('.carouselVideo').slick({
-    draggable: true,
-    dots: false,
-    arrows: false,
-    autoplaySpeed: 2000,
-    autoplay: true,
-    pauseOnHover: true,
-    pauseOnFocus: false
-});
+$(document).ready(function() {
+    $('.carouselVideo').slick({
+        draggable: true,
+        dots: false,
+        arrows: false,
+        autoplaySpeed: 2000,
+        autoplay: true,
+        pauseOnHover: true,
+        pauseOnFocus: false
+    });
+})
 
 // ===== Scroll to Top ====
 $(window).scroll(function() {
