@@ -41,7 +41,9 @@
                 <h3 class="text-white mb-3">Context</h3>
                 <p>{{ project.context }}</p>
             </div>
-            <div>{{ project.youtubeVideo | youtube_player | raw }}</div>
+            {% if project.youtubeVideo %}
+                <div>{{ project.youtubeVideo | youtube_player | raw }}</div>
+            {% endif %}
         </div>
     </section>
 {% endblock %}

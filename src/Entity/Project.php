@@ -18,7 +18,7 @@ class Project
     #[ORM\Column(type: 'string', length: 50)]
     private $title;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $imageHighlight;
 
     #[ORM\Column(type: 'date')]
@@ -33,7 +33,7 @@ class Project
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $youtubeVideo;
 
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: ImageHeader::class)]
@@ -45,7 +45,7 @@ class Project
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: ImageProject::class, cascade: ['remove'])]
     private $imageSlider;
 
-    #[ORM\Column(type: 'string', length: 25, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $roles;
 
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
@@ -158,7 +158,7 @@ class Project
         return $this->youtubeVideo;
     }
 
-    public function setYoutubeVideo(string $youtubeVideo): self
+    public function setYoutubeVideo(?string $youtubeVideo): self
     {
         $this->youtubeVideo = $youtubeVideo;
 
