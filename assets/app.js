@@ -13,5 +13,6 @@ import './bootstrap';
 import 'bootstrap/dist/js/bootstrap'
 
 import './slick'
+import './fastAverageColor'
 
 import './checkForm'
